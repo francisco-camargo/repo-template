@@ -123,3 +123,10 @@ Today a person copies the files and then runs `pre-commit install` by hand.
 If copier is adopted, its `_tasks` could run `git init` and `pre-commit install` as part of the copy.
 Those tasks only run with `--trust`, which asks the user to trust the template with a shell.
 Printing the commands in `_message_after_copy` instead avoids that, and costs the user two lines of typing.
+
+### Add the files the template still lacks
+
+- **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
+- **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
+- **A Python layer for `.pre-commit-config.yaml`**, from the Python config in [francisco-camargo/francisco-camargo](https://github.com/francisco-camargo/francisco-camargo). Only a Python project wants it, which is also a question.
+- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
