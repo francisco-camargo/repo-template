@@ -88,7 +88,7 @@ Printing the commands in `_message_after_copy` instead avoids that, and costs th
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
 - **A Python layer for `.pre-commit-config.yaml`**, from the Python config in [francisco-camargo/francisco-camargo](https://github.com/francisco-camargo/francisco-camargo). Only a Python project wants it, which is also a question.
-- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
+- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
 
 ## Move the shared docs out of dotfiles
 
@@ -105,8 +105,8 @@ From dotfiles' [docs/security.md](https://github.com/francisco-camargo/dotfiles/
 
 From dotfiles' open items, to become open items here:
 
-- [Consolidate the two pre-commit configs](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#consolidate-the-two-pre-commit-configs)
-- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#settle-how-spelling-gets-checked)
+- [Consolidate the two pre-commit configs](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#consolidate-the-two-pre-commit-configs)
+- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#settle-how-spelling-gets-checked)
 
 After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
 Until then, [keep dotfiles' copies in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
