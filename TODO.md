@@ -153,6 +153,7 @@ A markdownlint hook would enforce the rules at commit time, and its MD051 rule w
 francisco-camargo's `.gitattributes` marks images and PDFs as `binary`.
 With `* text=auto eol=lf`, git already detects binary files and leaves their line endings alone, so explicit rules add little.
 They help with a file type git misdetects.
+PDFs are the likeliest: git decides from the first 8000 bytes, and a PDF can open with that much plain text.
 They hurt with `*.svg`, which is text: marking it binary hides its diffs.
 Leave them out until a file gets mangled.
 
