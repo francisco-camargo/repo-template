@@ -81,7 +81,36 @@ Printing the commands in `_message_after_copy` instead avoids that, and costs th
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
 - **A Python layer for `.pre-commit-config.yaml`**, from the Python config in [francisco-camargo/francisco-camargo](https://github.com/francisco-camargo/francisco-camargo). Only a Python project wants it, which is also a question.
+- **The rest of a Python project**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. It rides on the same question as the Python layer.
 - **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
+
+## Run the gates in CI
+
+The gates run only in a clone where someone ran `pre-commit install`, so a commit made anywhere else skips them.
+A workflow under `.github/workflows/` that runs `pre-commit run --all-files` on every push and pull request catches those commits, after the fact but before a merge.
+It would also be the first place lychee's download runs on Linux, so check that it works there.
+
+## Add a `.markdownlint.yaml`
+
+[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo)'s Markdown notes keep one for the markdownlint VS Code extension.
+It turns off the line length rule (MD013), which one sentence per line needs.
+It also sets nested list indents to 4 spaces (MD007), which disagrees with the 2 spaces `.editorconfig` sets, so settle that before copying it.
+
+The extension only lints in the editor.
+A markdownlint hook would enforce the rules at commit time, and its MD051 rule would overlap lychee's check of links within a file.
+
+## Decide whether `.gitattributes` marks binaries
+
+francisco-camargo's `.gitattributes` marks images and PDFs as `binary`.
+With `* text=auto eol=lf`, git already detects binary files and leaves their line endings alone, so explicit rules add little.
+They help with a file type git misdetects.
+They hurt with `*.svg`, which is text: marking it binary hides its diffs.
+Leave them out until a file gets mangled.
+
+## Point francisco-camargo's notes here
+
+[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo) keeps learning notes, and some of them describe files this repo provides: the project-structure list and pre-commit config in its Python notes, `.gitattributes` in its git notes, and `.markdownlint.yaml` in its Markdown notes.
+As each lands here, replace the matching part of those notes with a link to this repo, so the files live in one place.
 
 ## Move the shared docs out of dotfiles
 
