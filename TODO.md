@@ -89,12 +89,6 @@ Some projects name the same file `.env.template`.
 Git keeps tracking one already committed, but a new one stays ignored.
 Either add `!.env.template`, or rename the file to `.env.example` when a project takes the template.
 
-## Offer `SECURITY.md` only to public repos
-
-`SECURITY.md` sends reports through private vulnerability reporting, which GitHub offers only on public repos.
-In a private repo it points at a channel that does not exist.
-The check should offer it only to a public repo, and under copier it would be a question.
-
 ## Decide whether copying runs git init and pre-commit install
 
 Today a person copies the files and then runs `pre-commit install` by hand.
