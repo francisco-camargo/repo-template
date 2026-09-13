@@ -88,6 +88,11 @@ Once a repo adds lines of its own to a template file, any merge, by hand or by c
 - **`cspell.json`** can `import` another config, so the template's settings could sit in a file of their own and the project's `cspell.json` hold only its words.
 - **`.gitignore`, `.gitattributes`, and `.pre-commit-config.yaml`** have no include. A block of the template's lines at the top, with the project's below, lets a three-way merge apply a template change without touching the project's lines.
 
+## Tag releases
+
+Tag a version whenever the template changes, so a project can record which version it took.
+`copier update` needs the tags too.
+
 ## Decide whether the link check belongs in every project
 
 The template runs lychee, which fails a commit when a Markdown link points at a file or heading that is not there.
