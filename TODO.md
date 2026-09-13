@@ -182,7 +182,6 @@ Nothing checks that the copies match, so a change to either copy needs the same 
 These differences are meant to be there:
 
 - **`.gitignore`:** the template lets `.env.example` through, and dotfiles has no such file.
-- **`.pre-commit-config.yaml`:** dotfiles' header comment mentions its `install.sh`.
 - **`cspell.json`:** dotfiles has its own word list.
 
 This item ends when dotfiles [takes the files from here](#move-the-shared-docs-out-of-dotfiles).
