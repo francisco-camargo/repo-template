@@ -3,6 +3,29 @@
 What could come next, and the case for each.
 Delete an item once it is done.
 
+## Check an existing repo against the template
+
+Start with a light touch: a check a person runs in an existing repo, which changes nothing without asking.
+
+- **For each template file the repo lacks**, list it and ask whether to copy it in.
+- **For each template file the repo already has**, suggest reviewing how the two differ, and point out what the template has that the repo's copy lacks, such as an ignore rule or a hook. The person decides what to adopt; the check never overwrites the file.
+
+A whole-file answer rarely fits a file a repo already has.
+Its copy usually holds lines of its own, such as Python ignore rules, a word list, or extra hooks.
+Replacing the file loses them, and skipping it, as `cp -rn` does, misses what the template added.
+So the check compares by the unit that matters: a line in `.gitignore` and `.gitattributes`, a hook id in `.pre-commit-config.yaml`, a setting in `cspell.json`.
+
+It could be a script in this repo or a Claude Code skill.
+A script needs nothing but a shell.
+A skill can explain a difference as well as show it, and since it would serve every repo, it would live in dotfiles.
+
+Adopting the gates in an existing repo takes a cleanup commit.
+The first `pre-commit run --all-files` rewrites old files through the whitespace and end-of-file fixers, and lychee reports links that were already broken.
+The gitleaks hook scans only staged changes, so run `gitleaks git` once to check the history.
+
+This does not replace [copier](#consider-copier): the check suggests, and copier keeps a repo in step.
+Running the check on a few repos first shows how often the template changes and what it gets wrong, which is what the copier decision turns on.
+
 ## Consider copier
 
 Copying `template/` by hand has two limits.
