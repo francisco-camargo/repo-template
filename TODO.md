@@ -81,3 +81,25 @@ Printing the commands in `_message_after_copy` instead avoids that, and costs th
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
 - **A Python layer for `.pre-commit-config.yaml`**, from the Python config in [francisco-camargo/francisco-camargo](https://github.com/francisco-camargo/francisco-camargo). Only a Python project wants it, which is also a question.
 - **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
+
+## Move the shared docs out of dotfiles
+
+Part of dotfiles' documentation is about any project, not one person's machines, and belongs here next to the files it explains.
+Each of these would move here and leave a link behind.
+
+From dotfiles' [docs/security.md](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md):
+
+- [Commit the reference, not the secret](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#commit-the-reference-not-the-secret)
+- [Git history does not forget](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#git-history-does-not-forget)
+- [The commit gates](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#the-commit-gates)
+- [Four layers, and what each one misses](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses)
+- [Repo-local hooks, or global, and the trap in the global one](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#repo-local-hooks-or-global-and-the-trap-in-the-global-one)
+
+From dotfiles' open items, to become open items here:
+
+- [Consolidate the two pre-commit configs](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#consolidate-the-two-pre-commit-configs)
+- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#settle-how-spelling-gets-checked)
+
+After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
+Its planned `SECURITY.md` would come from here too.
+The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credentials.json` lines, which belong to dotfiles alone; the move is the time to settle where they live.
