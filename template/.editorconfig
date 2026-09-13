@@ -1,0 +1,25 @@
+# Editor settings that agree with the commit gates, so an editor writes files
+# the gates accept. See https://editorconfig.org.
+root = true
+
+[*]
+charset = utf-8
+# .gitattributes stores LF; writing LF keeps the working copy the same.
+end_of_line = lf
+# end-of-file-fixer and trailing-whitespace would otherwise fail the commit.
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Two trailing spaces are a Markdown line break, which the trailing-whitespace
+# gate also keeps.
+[*.md]
+trim_trailing_whitespace = false
+
+[*.py]
+indent_size = 4
+
+# make requires tabs.
+[Makefile]
+indent_style = tab
