@@ -29,6 +29,16 @@ For a public repo, turn on push protection and a branch ruleset; [dotfiles' secu
 Everything a project receives lives in `template/`, and everything about this repo lives outside it.
 So this README, the TODO, and any tests of the template never land in a project.
 
+## Work on this repo
+
+This repo runs the template's own commit gates, from their place in `template/`:
+
+```sh
+pre-commit install -c template/.pre-commit-config.yaml
+```
+
+`scripts/check-anchors.sh` at the root only passes the call on to the copy in `template/`, so that the hook's path works both here and in a project.
+
 ## Where the files came from
 
 They started in [dotfiles](https://github.com/francisco-camargo/dotfiles), which holds one person's machine configuration.
