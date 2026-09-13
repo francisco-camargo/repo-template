@@ -125,6 +125,23 @@ It also sets nested list indents to 4 spaces (MD007), which disagrees with the 2
 The extension only lints in the editor.
 A markdownlint hook would enforce the rules at commit time, and its MD051 rule would overlap lychee's check of links within a file.
 
+## Decide whether `.editorconfig` earns its place
+
+`.editorconfig` tells an editor how to write a file: line endings, a final newline, trailing whitespace, and indentation.
+Other files and settings already cover most of that:
+
+- **`.gitattributes`** stores text files with LF, whatever the editor writes.
+- **The commit gates** fix a missing final newline and trailing whitespace before a commit lands.
+- **VS Code's user settings** set line endings, trimming, and indents, but only on one person's machine. dotfiles could carry them.
+- **A project's `.vscode/settings.json`** sets the same for everyone who opens the repo in VS Code.
+- **A formatter**, such as ruff in the planned Python layer, owns indentation in the files it formats.
+- **`.markdownlint.yaml`**, if added, sets Markdown list indents, and its value disagrees with `.editorconfig`'s.
+
+What `.editorconfig` alone does is get a file right as it is written, in any editor, for anyone.
+Against it: VS Code ignores the file without the EditorConfig extension, and with the extension, the file's `indent_size` overrides a user's `editor.tabSize` without saying so.
+
+Decide which place owns each setting, then keep `.editorconfig`, cut it to what nothing else covers, or drop it.
+
 ## Decide whether `.gitattributes` marks binaries
 
 francisco-camargo's `.gitattributes` marks images and PDFs as `binary`.
