@@ -101,5 +101,20 @@ From dotfiles' open items, to become open items here:
 - [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/README.md#settle-how-spelling-gets-checked)
 
 After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
+Until then, [keep dotfiles' copies in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
 Its planned `SECURITY.md` would come from here too.
 The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credentials.json` lines, which belong to dotfiles alone; the move is the time to settle where they live.
+
+## Keep dotfiles' copies in step until it takes them from here
+
+dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.pre-commit-config.yaml`, `cspell.json`, and `scripts/check-anchors.sh`.
+Nothing checks that the copies match, so a change to either copy needs the same change in the other, as a commit in each repo.
+
+`diff` each pair to find drift.
+These differences are meant to be there:
+
+- **`.gitignore`:** the template lets `.env.example` through, and dotfiles has no such file.
+- **`.pre-commit-config.yaml`:** dotfiles' header comment mentions its `install.sh`.
+- **`cspell.json`:** dotfiles has its own word list.
+
+This item ends when dotfiles [takes the files from here](#move-the-shared-docs-out-of-dotfiles).
