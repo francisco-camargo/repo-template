@@ -74,6 +74,7 @@ A conflict shows up as inline markers, the same as in a `git merge`.
 **Not yet known.**
 Copier's documentation says little about taking over a project it did not create.
 Running `copier copy` into an existing repo should ask before overwriting each file that differs, then write `.copier-answers.yml`, after which `copier update` works.
+Overwriting loses the repo's own lines, so they would have to be merged back by hand once, and the [check](#check-an-existing-repo-against-the-template) would show which ones.
 That needs a trial run before anything relies on it, and dotfiles is the first project to try it on.
 
 The decision turns on how many projects use this repo and how often the files change.
