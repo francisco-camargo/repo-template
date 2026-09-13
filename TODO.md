@@ -57,62 +57,12 @@ The decision turns on how many projects use this repo and how often the files ch
 With a few projects and rare changes, `cp -rn` and a `diff` are enough.
 Once fixes keep failing to reach projects, copier earns its cost.
 
-## Decide whether the anchor check belongs in every project
+## Decide whether the link check belongs in every project
 
-dotfiles' pre-commit config runs a script that fails a commit when a Markdown link points at a heading that is not there.
-dotfiles called it specific to that repo.
-Every project that starts here has a README, and most will link within it, which argues for including it.
-
-## Skip links inside inline code in the anchor check
-
-`scripts/check-anchors.sh` ignores links inside fenced code blocks, but still checks a link written inside backticks, as an example of Markdown syntax.
-GitHub renders that as text, so a broken anchor there fails a commit for nothing.
-This item hit it: an example here had to become a description.
-A fix has to handle spans that cross lines and backtick runs of different lengths, so it waits until a description will not do.
-Make the change in dotfiles' copy too, while [the copies are kept in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
-
-## Consider publishing the anchor check as a pre-commit hook
-
-Today every repo that runs the anchor check keeps its own copy of the script, so a fix is a commit in each, and nothing notices when the copies drift.
-
-Installing the script machine-wide from dotfiles would not fix that.
-A repo's `.pre-commit-config.yaml` is committed, so a hook that calls a script only your machines have fails for anyone else who clones the repo, and in CI.
-
-pre-commit's own answer is a hook published from one repo.
-This repo would carry a `.pre-commit-hooks.yaml`:
-
-```yaml
-- id: check-anchors
-  name: Markdown anchors resolve
-  entry: template/scripts/check-anchors.sh
-  language: script
-  files: \.md$
-  pass_filenames: false
-```
-
-and each repo that wants the check would pin a version of it, as it does for gitleaks:
-
-```yaml
-- repo: https://github.com/francisco-camargo/repo-template
-  rev: v0.1.0
-  hooks:
-    - id: check-anchors
-```
-
-**What it gains.**
-
-- **One copy.** A fix is one commit and a tag, and dotfiles' copy, `template/scripts/`, and the root wrapper script all go away.
-- **Upgrades are visible.** Each repo moves with `pre-commit autoupdate`, and its `rev` line says which version it runs.
-- **Nothing to install.** Whoever clones a repo gets the hook the way they get gitleaks.
-
-**What it costs.**
-
-- **Publishing is a promise.** Once a tag is public, other repos may pin it, so a change to the hook's id, its arguments, or what it accepts can break them.
-- **Releases need tags.** Copier would need them too.
-- **Testing a change before tagging it** takes `pre-commit try-repo . check-anchors --all-files`.
-- **`language: script` runs with the machine's `bash`.** That holds today as well, but a run on Windows should confirm it before anything relies on it.
-
-If more shared hooks turn up, a repo of their own would suit them better than this one.
+The template runs lychee, which fails a commit when a Markdown link points at a file or heading that is not there.
+dotfiles first added a check like it as specific to that repo.
+Every project that starts here has a README, and most will link within it, which argues for keeping it.
+Against it: the first run downloads lychee through an installer that Windows may flag.
 
 ## Split global excludes from per-project ignores
 
@@ -158,7 +108,7 @@ The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credent
 
 ## Keep dotfiles' copies in step until it takes them from here
 
-dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.pre-commit-config.yaml`, `cspell.json`, and `scripts/check-anchors.sh`.
+dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.pre-commit-config.yaml`, and `cspell.json`.
 Nothing checks that the copies match, so a change to either copy needs the same change in the other, as a commit in each repo.
 
 `diff` each pair to find drift.
