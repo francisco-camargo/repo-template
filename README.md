@@ -14,6 +14,7 @@ cp -rn ~/git/repo-template/template/. my-project/
 
 `-n` skips any file the project already has, so running it in an existing project adds what is missing and replaces nothing.
 To see how a file you kept differs from the template's, `diff` the two.
+Or, with Claude Code, ask it to check the project against repo-template: dotfiles' [repo-template-check skill](https://github.com/francisco-camargo/dotfiles/tree/main/claude/skills/repo-template-check) lists the missing files and asks which you want, and suggests what a file you kept lacks.
 
 Then, inside the project:
 
