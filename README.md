@@ -21,6 +21,9 @@ Then, inside the project:
 pre-commit install
 ```
 
+The first commit afterwards downloads and builds the tools the gates run, which can take a while.
+lychee, the link checker, arrives through an installer that Windows may flag with a firewall alert; cancel it, since nothing needs to accept connections.
+
 Some protection lives in GitHub's settings rather than in files, and no copy can turn it on.
 For a public repo, turn on push protection and a branch ruleset; [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) have the commands.
 `SECURITY.md` sends reports through GitHub's private vulnerability reporting, which is off until you turn it on:
@@ -41,8 +44,6 @@ This repo runs the template's own commit gates, from their place in `template/`:
 ```sh
 pre-commit install -c template/.pre-commit-config.yaml
 ```
-
-`scripts/check-anchors.sh` at the root only passes the call on to the copy in `template/`, so that the hook's path works both here and in a project.
 
 ## Where the files came from
 
