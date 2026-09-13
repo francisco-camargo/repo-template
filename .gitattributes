@@ -1,0 +1,3 @@
+# Normalize to LF so shell scripts work on every platform. template/ has its
+# own copy for projects, which covers only the files under it here.
+* text=auto eol=lf
