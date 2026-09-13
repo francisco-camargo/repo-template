@@ -3,29 +3,6 @@
 What could come next, and the case for each.
 Delete an item once it is done.
 
-## Check an existing repo against the template
-
-Start with a light touch: a check a person runs in an existing repo, which changes nothing without asking.
-
-- **For each template file the repo lacks**, list it and ask whether to copy it in.
-- **For each template file the repo already has**, suggest reviewing how the two differ, and point out what the template has that the repo's copy lacks, such as an ignore rule or a hook. The person decides what to adopt; the check never overwrites the file.
-
-A whole-file answer rarely fits a file a repo already has.
-Its copy usually holds lines of its own, such as Python ignore rules, a word list, or extra hooks.
-Replacing the file loses them, and skipping it, as `cp -rn` does, misses what the template added.
-So the check compares by the unit that matters: a line in `.gitignore` and `.gitattributes`, a hook id in `.pre-commit-config.yaml`, a setting in `cspell.json`.
-
-It could be a script in this repo or a Claude Code skill.
-A script needs nothing but a shell.
-A skill can explain a difference as well as show it, and since it would serve every repo, it would live in dotfiles.
-
-Adopting the gates in an existing repo takes a cleanup commit.
-The first `pre-commit run --all-files` rewrites old files through the whitespace and end-of-file fixers, and lychee reports links that were already broken.
-The gitleaks hook scans only staged changes, so run `gitleaks git` once to check the history.
-
-This does not replace [copier](#consider-copier): the check suggests, and copier keeps a repo in step.
-Running the check on a few repos first shows how often the template changes and what it gets wrong, which is what the copier decision turns on.
-
 ## Consider copier
 
 Copying `template/` by hand has two limits.
@@ -74,7 +51,7 @@ A conflict shows up as inline markers, the same as in a `git merge`.
 **Not yet known.**
 Copier's documentation says little about taking over a project it did not create.
 Running `copier copy` into an existing repo should ask before overwriting each file that differs, then write `.copier-answers.yml`, after which `copier update` works.
-Overwriting loses the repo's own lines, so they would have to be merged back by hand once, and the [check](#check-an-existing-repo-against-the-template) would show which ones.
+Overwriting loses the repo's own lines, so they would have to be merged back by hand once, and dotfiles' [repo-template-check skill](https://github.com/francisco-camargo/dotfiles/tree/main/claude/skills/repo-template-check) would show which ones.
 That needs a trial run before anything relies on it, and dotfiles is the first project to try it on.
 
 The decision turns on how many projects use this repo and how often the files change.
