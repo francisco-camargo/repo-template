@@ -63,6 +63,14 @@ dotfiles' pre-commit config runs a script that fails a commit when a Markdown li
 dotfiles called it specific to that repo.
 Every project that starts here has a README, and most will link within it, which argues for including it.
 
+## Skip links inside inline code in the anchor check
+
+`scripts/check-anchors.sh` ignores links inside fenced code blocks, but still checks a link written inside backticks, as an example of Markdown syntax.
+GitHub renders that as text, so a broken anchor there fails a commit for nothing.
+This item hit it: an example here had to become a description.
+A fix has to handle spans that cross lines and backtick runs of different lengths, so it waits until a description will not do.
+Make the change in dotfiles' copy too, while [the copies are kept in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
+
 ## Split global excludes from per-project ignores
 
 dotfiles plans a global `core.excludesFile`, which would make a copied `.gitignore` partly unnecessary.
