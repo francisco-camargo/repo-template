@@ -105,6 +105,13 @@ Against it: the first run downloads lychee through an installer that Windows may
 dotfiles plans a global `core.excludesFile`, which would make a copied `.gitignore` partly unnecessary.
 The line between them: OS clutter such as `.DS_Store` concerns one person's machine and belongs in the global file; credentials and build output protect everyone who clones a project and belong in its `.gitignore`.
 
+## Let `.env.template` through `.gitignore`
+
+The template ignores `.env.*` and lets only `.env.example` through.
+Some projects name the same file `.env.template`.
+Git keeps tracking one already committed, but a new one stays ignored.
+Either add `!.env.template`, or rename the file to `.env.example` when a project takes the template.
+
 ## Decide whether copying runs git init and pre-commit install
 
 Today a person copies the files and then runs `pre-commit install` by hand.
