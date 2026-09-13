@@ -23,6 +23,11 @@ pre-commit install
 
 Some protection lives in GitHub's settings rather than in files, and no copy can turn it on.
 For a public repo, turn on push protection and a branch ruleset; [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) have the commands.
+`SECURITY.md` sends reports through GitHub's private vulnerability reporting, which is off until you turn it on:
+
+```sh
+gh api -X PUT repos/<owner>/<repo>/private-vulnerability-reporting
+```
 
 ## Why the files sit in `template/`
 
