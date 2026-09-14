@@ -122,8 +122,15 @@ The template's own gaps are the cheap part.
 `check-executables-have-shebangs` is the other half of `check-shebang-scripts-are-executable`, which the template already runs.
 `mixed-line-ending` overlaps what `.gitattributes` already does, so it may be redundant rather than missing.
 
-`pre-commit` has no include, so a project gets the Python layer either as a block copied below the shared one, as [Keep template lines apart from project lines](#keep-template-lines-apart-from-project-lines) describes, or from a file generated out of parts, which trades drift for a build step.
-If copier is adopted, a question decides whether the layer appears at all.
+`pre-commit` reads one config and has no include, so the layers have to become one file.
+Ways to get there:
+
+- **Build the file from pieces.** A base file holds `repos:` and the shared hooks. Each layer, such as `python.yaml`, holds only list items at the same indent, so `cat base.yaml python.yaml > .pre-commit-config.yaml` gives valid YAML with no merge tool. A later change to a piece reaches no project that already built its file.
+- **Let copier ask.** One `.pre-commit-config.yaml.jinja` wraps each layer in a block such as `{% if python %}`, so the answers pick the layers and `copier update` carries later changes in. This is building from pieces, plus an update path, and it waits on [Consider copier](#consider-copier).
+- **Run each layer from the git hook.** `pre-commit run --config <file>` takes any file, so a hand-written hook could run the base and then each layer. Each run stashes and restores unstaged changes on its own, `pre-commit install` would overwrite the hook, and CI would see only `.pre-commit-config.yaml`. This one is not worth it.
+
+Whichever way builds it, a project commits the one file, since that is all `pre-commit` and CI read.
+Keep the layers in blocks, as [Keep template lines apart from project lines](#keep-template-lines-apart-from-project-lines) describes, so a merge can tell them apart.
 
 ## Run the gates in CI
 
