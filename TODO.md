@@ -100,9 +100,30 @@ Printing the commands in `_message_after_copy` instead avoids that, and costs th
 
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
-- **A Python layer for `.pre-commit-config.yaml`**, from the Python config in [francisco-camargo/francisco-camargo](https://github.com/francisco-camargo/francisco-camargo). Only a Python project wants it, which is also a question.
+- **A Python layer for `.pre-commit-config.yaml`**, sorted out under [Consolidate the pre-commit configs](#consolidate-the-pre-commit-configs). Only a Python project wants it, which is also a question.
 - **The rest of a Python project**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. It rides on the same question as the Python layer.
 - **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
+
+## Consolidate the pre-commit configs
+
+[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo/blob/master/src/python/pre-commit/.pre-commit-config.yaml) keeps a fuller pre-commit config for Python work, written without reference to `template/.pre-commit-config.yaml`.
+
+Both pin `pre-commit/pre-commit-hooks` at the same revision and share most of its hygiene hooks.
+Beyond those, each lacks what the other has where it counts: `gitleaks` runs only here, though the Python config sits in front of dependency files and API clients, and `codespell` runs only there, though every project from here starts with Markdown.
+
+Pulled apart, the hooks fall into layers:
+
+- **Wanted everywhere.** The hygiene hooks, `detect-private-key`, `check-shebang-scripts-are-executable`, `gitleaks`, `codespell`, and `lychee` if [the link check stays](#decide-whether-the-link-check-belongs-in-every-project).
+- **Python only.** `black`, `flake8`, `isort`, `mypy`, `bandit`, `interrogate`, `pip-audit`, `add-trailing-comma`, and from `pre-commit-hooks`, `debug-statements`, `name-tests-test`, and `requirements-txt-fixer`.
+- **Undecided.** `prettier` formats JSON, YAML, and Markdown as well as JavaScript, so it could sit in either layer, or in neither.
+
+The template's own gaps are the cheap part.
+`check-json` and `check-toml` are in the Python config and not here.
+`check-executables-have-shebangs` is the other half of `check-shebang-scripts-are-executable`, which the template already runs.
+`mixed-line-ending` overlaps what `.gitattributes` already does, so it may be redundant rather than missing.
+
+`pre-commit` has no include, so a project gets the Python layer either as a block copied below the shared one, as [Keep template lines apart from project lines](#keep-template-lines-apart-from-project-lines) describes, or from a file generated out of parts, which trades drift for a build step.
+If copier is adopted, a question decides whether the layer appears at all.
 
 ## Run the gates in CI
 
@@ -165,7 +186,6 @@ From dotfiles' [docs/security.md](https://github.com/francisco-camargo/dotfiles/
 
 From dotfiles' open items, to become open items here:
 
-- [Consolidate the two pre-commit configs](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#consolidate-the-two-pre-commit-configs)
 - [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#settle-how-spelling-gets-checked)
 
 After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
