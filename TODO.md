@@ -30,7 +30,7 @@ uvx copier update
 - **`copier.yml`** at the root holds the questions and the settings.
 - **`_subdirectory: template`** points copier at the directory this repo already uses, so adopting copier moves no files.
 - **Files ending in `.jinja`** are rendered, so `README.md.jinja` can use the project name from an answer. Files without the suffix are copied as they are.
-- **Jinja in a file name** makes a file conditional on an answer, such as a Python layer of the pre-commit config that only appears in a Python project.
+- **Jinja in a file name** makes a file conditional on an answer, such as a `pyproject.toml` that only appears in a Python project.
 - **`_skip_if_exists`** names files a project owns once they exist, such as `README.md`.
 - **`_tasks`** lists commands to run after copying, such as `git init` and `pre-commit install`. Copier refuses to run them unless the user passes `--trust`, which asks the user to trust the template with a shell.
 - **`_message_after_copy`** is text printed at the end, which is where the GitHub settings in [Use it](README.md#use-it) would go.
@@ -100,37 +100,8 @@ Printing the commands in `_message_after_copy` instead avoids that, and costs th
 
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
-- **A Python layer for `.pre-commit-config.yaml`**, sorted out under [Consolidate the pre-commit configs](#consolidate-the-pre-commit-configs). Only a Python project wants it, which is also a question.
-- **The rest of a Python project**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. It rides on the same question as the Python layer.
+- **A Python project's files**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. Only a Python project wants them, which is also a question.
 - **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/TODO.md#merge-settingsjson-instead-of-replacing-it). Whether to include it is a question too.
-
-## Consolidate the pre-commit configs
-
-[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo/blob/master/src/python/pre-commit/.pre-commit-config.yaml) keeps a fuller pre-commit config for Python work, written without reference to `template/.pre-commit-config.yaml`.
-
-Both pin `pre-commit/pre-commit-hooks` at the same revision and share most of its hygiene hooks.
-Beyond those, each lacks what the other has where it counts: `gitleaks` runs only here, though the Python config sits in front of dependency files and API clients, and `codespell` runs only there, though every project from here starts with Markdown.
-
-Pulled apart, the hooks fall into layers:
-
-- **Wanted everywhere.** The hygiene hooks, `detect-private-key`, `check-shebang-scripts-are-executable`, `gitleaks`, `codespell`, and `lychee` if [the link check stays](#decide-whether-the-link-check-belongs-in-every-project).
-- **Python only.** `black`, `flake8`, `isort`, `mypy`, `bandit`, `interrogate`, `pip-audit`, `add-trailing-comma`, and from `pre-commit-hooks`, `debug-statements`, `name-tests-test`, and `requirements-txt-fixer`.
-- **Undecided.** `prettier` formats JSON, YAML, and Markdown as well as JavaScript, so it could sit in either layer, or in neither.
-
-The template's own gaps are the cheap part.
-`check-json` and `check-toml` are in the Python config and not here.
-`check-executables-have-shebangs` is the other half of `check-shebang-scripts-are-executable`, which the template already runs.
-`mixed-line-ending` overlaps what `.gitattributes` already does, so it may be redundant rather than missing.
-
-`pre-commit` reads one config and has no include, so the layers have to become one file.
-Ways to get there:
-
-- **Build the file from pieces.** A base file holds `repos:` and the shared hooks. Each layer, such as `python.yaml`, holds only list items at the same indent, so `cat base.yaml python.yaml > .pre-commit-config.yaml` gives valid YAML with no merge tool. A later change to a piece reaches no project that already built its file.
-- **Let copier ask.** One `.pre-commit-config.yaml.jinja` wraps each layer in a block such as `{% if python %}`, so the answers pick the layers and `copier update` carries later changes in. This is building from pieces, plus an update path, and it waits on [Consider copier](#consider-copier).
-- **Run each layer from the git hook.** `pre-commit run --config <file>` takes any file, so a hand-written hook could run the base and then each layer. Each run stashes and restores unstaged changes on its own, `pre-commit install` would overwrite the hook, and CI would see only `.pre-commit-config.yaml`. This one is not worth it.
-
-Whichever way builds it, a project commits the one file, since that is all `pre-commit` and CI read.
-Keep the layers in blocks, as [Keep template lines apart from project lines](#keep-template-lines-apart-from-project-lines) describes, so a merge can tell them apart.
 
 ## Run the gates in CI
 
@@ -156,7 +127,7 @@ Other files and settings already cover most of that:
 - **The commit gates** fix a missing final newline and trailing whitespace before a commit lands.
 - **VS Code's user settings** set line endings, trimming, and indents, but only on one person's machine. dotfiles could carry them.
 - **A project's `.vscode/settings.json`** sets the same for everyone who opens the repo in VS Code.
-- **A formatter**, such as ruff in the planned Python layer, owns indentation in the files it formats.
+- **A formatter**, such as black in the template's commit gates, owns indentation in the files it formats.
 - **`.markdownlint.yaml`**, if added, sets Markdown list indents, and its value disagrees with `.editorconfig`'s.
 
 What `.editorconfig` alone does is get a file right as it is written, in any editor, for anyone.
