@@ -103,7 +103,6 @@ Take the config first: with no config, the installed hook fails every commit.
 
 | Repo | Config | Hook |
 | --- | --- | --- |
-| [francisco-camargo](https://github.com/francisco-camargo/francisco-camargo) | none | none |
 | [gb-roles-and-responsibilities](https://github.com/francisco-camargo/gb-roles-and-responsibilities) | none | none |
 | [financial-transactions](https://github.com/francisco-camargo/financial-transactions) | its own | none |
 | [gb-flyers](https://github.com/francisco-camargo/gb-flyers) | its own | installed |
@@ -153,7 +152,7 @@ Leave them out until a file gets mangled.
 
 ## Point francisco-camargo's notes here
 
-[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo) keeps learning notes, and some of them describe files this repo provides: the project-structure list in its Python notes, `.gitattributes` in its git notes, and `.markdownlint.yaml` in its Markdown notes.
+[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo) keeps learning notes, and some of them describe files this repo provides: the project-structure list in its Python notes, and `.gitattributes` in its git notes.
 As each lands here, replace the matching part of those notes with a link to this repo, so the files live in one place.
 
 ## Move the shared docs out of dotfiles
