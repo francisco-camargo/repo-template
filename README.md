@@ -50,6 +50,15 @@ The markdownlint VS Code extension reads the same file, so the editor flags what
 markdownlint looks for its config in the linted file's folder and each folder above it, so the file has to sit at the project root.
 [francisco-camargo's Markdown notes](https://github.com/francisco-camargo/francisco-camargo/blob/master/src/markdown/README.md#markdown-linting) cover the editor settings and the fallback for a repo without the file.
 
+## Spelling
+
+Two checkers, each with its own list of exceptions:
+
+- **cspell** underlines words in the editor that no dictionary knows. A word correct in this project goes in `cspell.json`, under `words`. Its `ignoreRegExpList` skips link targets, which are paths rather than words.
+- **codespell** fails a commit with a known misspelling. A real word it rejects, such as a business name, goes in `.codespellrc`, under `ignore-words-list`, with a comment naming it.
+
+Words correct in every project belong in neither file; [dotfiles](https://github.com/francisco-camargo/dotfiles) keeps a personal word list for them.
+
 ## Why the files sit in `template/`
 
 Everything a project receives lives in `template/`, and everything about this repo lives outside it.
