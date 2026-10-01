@@ -144,7 +144,7 @@ Other files and settings already cover most of that:
 - **VS Code's user settings** set line endings, trimming, and indents, but only on one person's machine. dotfiles could carry them.
 - **A project's `.vscode/settings.json`** sets the same for everyone who opens the repo in VS Code.
 - **A formatter**, such as black in the template's commit gates, owns indentation in the files it formats.
-- **`.markdownlint.yaml`**, if added, sets Markdown list indents, and its value disagrees with `.editorconfig`'s.
+- **`.markdownlint.yaml`** sets the Markdown list indent the linter accepts.
 
 What `.editorconfig` alone does is get a file right as it is written, in any editor, for anyone.
 Against it: VS Code ignores the file without the EditorConfig extension, and with the extension, the file's `indent_size` overrides a user's `editor.tabSize` without saying so.
