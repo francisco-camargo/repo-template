@@ -115,15 +115,6 @@ The gates run only in a clone where someone ran `pre-commit install`, so a commi
 A workflow under `.github/workflows/` that runs `pre-commit run --all-files` on every push and pull request catches those commits, after the fact but before a merge.
 It would also be the first place lychee's download runs on Linux, so check that it works there.
 
-## Decide whether `.gitattributes` marks binaries
-
-francisco-camargo's `.gitattributes` marks images and PDFs as `binary`.
-With `* text=auto eol=lf`, git already detects binary files and leaves their line endings alone, so explicit rules add little.
-They help with a file type git misdetects.
-PDFs are the likeliest: git decides from the first 8000 bytes, and a PDF can open with that much plain text.
-They hurt with `*.svg`, which is text: marking it binary hides its diffs.
-Leave them out until a file gets mangled.
-
 ## Point francisco-camargo's notes here
 
 [francisco-camargo](https://github.com/francisco-camargo/francisco-camargo) keeps learning notes, and some of them describe files this repo provides: the project-structure list in its Python notes, and `.gitattributes` in its git notes.
