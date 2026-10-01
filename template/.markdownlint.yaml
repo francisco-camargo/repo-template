@@ -3,3 +3,5 @@ MD007:
   indent: 4 # Matches .editorconfig's Markdown indent
 MD033:
   allowed_elements: [img] # A Markdown image cannot set a width
+MD004:
+  style: dash # Keeps * for emphasis
