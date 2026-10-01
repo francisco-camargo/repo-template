@@ -103,8 +103,6 @@ Take the config first: with no config, the installed hook fails every commit.
 
 | Repo | Config | Hook |
 | --- | --- | --- |
-| [gb-roles-and-responsibilities](https://github.com/francisco-camargo/gb-roles-and-responsibilities) | none | none |
-| [financial-transactions](https://github.com/francisco-camargo/financial-transactions) | its own | none |
 | [gb-flyers](https://github.com/francisco-camargo/gb-flyers) | its own | installed |
 
 For each, copy `template/.pre-commit-config.yaml`, merging in any hooks of the repo's own, run `pre-commit run --all-files` and commit what it fixes, then run `pre-commit install`.
