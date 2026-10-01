@@ -35,6 +35,15 @@ It sends reports through GitHub's private vulnerability reporting, which GitHub 
 gh api -X PUT repos/<owner>/<repo>/private-vulnerability-reporting
 ```
 
+## Markdown linting
+
+`.markdownlint.yaml` holds markdownlint's rules: its defaults, with line length (MD013) off, since one sentence per line makes long lines normal, and nested list indents (MD007) at 4 spaces, the indent `.editorconfig` gives Markdown.
+The commit gates run markdownlint with `--fix`, so it fixes what it can, such as list indents, and fails the commit so the fix gets reviewed.
+The markdownlint VS Code extension reads the same file, so the editor flags what the gate would.
+
+markdownlint looks for its config in the linted file's folder and each folder above it, so the file has to sit at the project root.
+[francisco-camargo's Markdown notes](https://github.com/francisco-camargo/francisco-camargo/blob/master/src/markdown/README.md#markdown-linting) cover the editor settings and the fallback for a repo without the file.
+
 ## Why the files sit in `template/`
 
 Everything a project receives lives in `template/`, and everything about this repo lives outside it.
@@ -47,6 +56,9 @@ This repo runs the template's own commit gates, from their place in `template/`:
 ```sh
 pre-commit install -c template/.pre-commit-config.yaml
 ```
+
+markdownlint would not find `template/.markdownlint.yaml` from this repo's own Markdown files, which sit above it.
+So the root `.markdownlint.yaml` holds one line that extends the template's, and this repo lints by the same rules as every project.
 
 ## Where the files came from
 
