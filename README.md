@@ -37,7 +37,12 @@ gh api -X PUT repos/<owner>/<repo>/private-vulnerability-reporting
 
 ## Markdown linting
 
-`.markdownlint.yaml` holds markdownlint's rules: its defaults, with line length (MD013) off, since one sentence per line makes long lines normal, and nested list indents (MD007) at 4 spaces, the indent `.editorconfig` gives Markdown.
+`.markdownlint.yaml` holds markdownlint's rules: its defaults, with these changes.
+
+- **Line length (MD013):** off, since one sentence per line makes long lines normal.
+- **Nested list indents (MD007):** 4 spaces, the indent `.editorconfig` gives Markdown.
+- **Inline HTML (MD033):** `<img>` allowed, since a Markdown image cannot set a width.
+
 The commit gates run markdownlint with `--fix`, so it fixes what it can, such as list indents, and fails the commit so the fix gets reviewed.
 The markdownlint VS Code extension reads the same file, so the editor flags what the gate would.
 
