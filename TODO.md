@@ -96,18 +96,11 @@ If copier is adopted, its `_tasks` could run `git init` and `pre-commit install`
 Those tasks only run with `--trust`, which asks the user to trust the template with a shell.
 Printing the commands in `_message_after_copy` instead avoids that, and costs the user two lines of typing.
 
-## Install the gates in the other repos
+## Run the gates over the other repos' files
 
-The gates run only in a clone that has a pre-commit config and ran `pre-commit install`.
-Take the config first: with no config, the installed hook fails every commit.
-
-| Repo | Config | Hook |
-| --- | --- | --- |
-| [gb-flyers](https://github.com/francisco-camargo/gb-flyers) | its own | installed |
-
-For each, copy `template/.pre-commit-config.yaml`, merging in any hooks of the repo's own, run `pre-commit run --all-files` and commit what it fixes, then run `pre-commit install`.
-The install lives in `.git/hooks/`, so it covers one clone; a second clone or machine needs it again.
-Drop a row once its repo is done.
+Every repo has the template's gates, but the gates check only the files a commit stages, so a file nobody has touched since still fails them.
+francisco-camargo's notes fail markdownlint the most; the gb-* repos fail it a few times each.
+In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix the rest by hand.
 
 ## Add the files the template still lacks
 
