@@ -24,6 +24,7 @@ pre-commit install
 
 The first commit afterwards downloads and builds the tools the gates run, which can take a while.
 lychee, the link checker, arrives through an installer that Windows may flag with a firewall alert; cancel it, since nothing needs to accept connections.
+markdownlint, the Markdown linter, runs on Node, which pre-commit downloads for it if Node is not installed.
 
 Some protection lives in GitHub's settings rather than in files, and no copy can turn it on.
 When a repo starts public, or a private one is made public, turn on push protection and a branch ruleset; [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) have the commands.

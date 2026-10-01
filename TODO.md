@@ -125,15 +125,6 @@ The gates run only in a clone where someone ran `pre-commit install`, so a commi
 A workflow under `.github/workflows/` that runs `pre-commit run --all-files` on every push and pull request catches those commits, after the fact but before a merge.
 It would also be the first place lychee's download runs on Linux, so check that it works there.
 
-## Add a `.markdownlint.yaml`
-
-[francisco-camargo](https://github.com/francisco-camargo/francisco-camargo)'s Markdown notes keep one for the markdownlint VS Code extension.
-It turns off the line length rule (MD013), which one sentence per line needs.
-It also sets nested list indents to 4 spaces (MD007), which disagrees with the 2 spaces `.editorconfig` sets, so settle that before copying it.
-
-The extension only lints in the editor.
-A markdownlint hook would enforce the rules at commit time, and its MD051 rule would overlap lychee's check of links within a file.
-
 ## Decide whether `.editorconfig` earns its place
 
 `.editorconfig` tells an editor how to write a file: line endings, a final newline, trailing whitespace, and indentation.
