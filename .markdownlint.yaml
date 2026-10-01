@@ -1,0 +1,1 @@
+extends: template/.markdownlint.yaml # This repo runs the template's gates, so it lints by the template's rules
