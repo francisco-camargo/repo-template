@@ -40,7 +40,7 @@ gh api -X PUT repos/<owner>/<repo>/private-vulnerability-reporting
 `.markdownlint.yaml` holds markdownlint's rules: its defaults, with these changes.
 
 - **Line length (MD013):** off, since one sentence per line makes long lines normal.
-- **Nested list indents (MD007):** 4 spaces, the indent `.editorconfig` gives Markdown.
+- **Nested list indents (MD007):** 4 spaces, the width of a Tab under VS Code's `editor.tabSize`.
 - **Inline HTML (MD033):** `<img>` allowed, since a Markdown image cannot set a width.
 - **List markers (MD004):** `-` only, since `*` also marks emphasis and is harder to read beside it.
 
@@ -58,6 +58,15 @@ Two checkers, each with its own list of exceptions:
 - **codespell** fails a commit with a known misspelling. A real word it rejects, such as a business name, goes in `.codespellrc`, under `ignore-words-list`, with a comment naming it.
 
 Words correct in every project belong in neither file; [dotfiles](https://github.com/francisco-camargo/dotfiles) keeps a personal word list for them.
+
+## Left out: `.editorconfig`
+
+An [`.editorconfig`](https://editorconfig.org) tells any editor how to write a file: line endings, a final newline, trailing whitespace, and indentation.
+The template has none, since for one person in VS Code it adds nothing.
+`.gitattributes` and the commit gates enforce the same rules, and VS Code ignores the file unless the EditorConfig extension is installed.
+
+Add one when a team shares a repo and its members use different editors.
+It then gets each file right as it is written, in every editor, rather than at commit time.
 
 ## Why the files sit in `template/`
 

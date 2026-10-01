@@ -115,23 +115,6 @@ The gates run only in a clone where someone ran `pre-commit install`, so a commi
 A workflow under `.github/workflows/` that runs `pre-commit run --all-files` on every push and pull request catches those commits, after the fact but before a merge.
 It would also be the first place lychee's download runs on Linux, so check that it works there.
 
-## Decide whether `.editorconfig` earns its place
-
-`.editorconfig` tells an editor how to write a file: line endings, a final newline, trailing whitespace, and indentation.
-Other files and settings already cover most of that:
-
-- **`.gitattributes`** stores text files with LF, whatever the editor writes.
-- **The commit gates** fix a missing final newline and trailing whitespace before a commit lands.
-- **VS Code's user settings** set line endings, trimming, and indents, but only on one person's machine. dotfiles could carry them.
-- **A project's `.vscode/settings.json`** sets the same for everyone who opens the repo in VS Code.
-- **A formatter**, such as black in the template's commit gates, owns indentation in the files it formats.
-- **`.markdownlint.yaml`** sets the Markdown list indent the linter accepts.
-
-What `.editorconfig` alone does is get a file right as it is written, in any editor, for anyone.
-Against it: VS Code ignores the file without the EditorConfig extension, and with the extension, the file's `indent_size` overrides a user's `editor.tabSize` without saying so.
-
-Decide which place owns each setting, then keep `.editorconfig`, cut it to what nothing else covers, or drop it.
-
 ## Decide whether `.gitattributes` marks binaries
 
 francisco-camargo's `.gitattributes` marks images and PDFs as `binary`.
