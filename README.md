@@ -55,7 +55,7 @@ markdownlint looks for its config in the linted file's folder and each folder ab
 Two checkers, each with its own list of exceptions:
 
 - **cspell** underlines words in the editor that no dictionary knows. A word correct in this project goes in `cspell.json`, under `words`. Its `ignoreRegExpList` skips link targets, which are paths rather than words.
-- **codespell** fails a commit with a known misspelling. A real word it rejects, such as a business name, goes in `.codespellrc`, under `ignore-words-list`, with a comment naming it.
+- **typos** fails a commit with a known misspelling, and reports it rather than rewriting it. A real word it rejects, such as a business name, goes in `_typos.toml`, under `[default.extend-words]`, mapped to itself, with a comment naming it.
 
 Words correct in every project belong in neither file; [dotfiles](https://github.com/francisco-camargo/dotfiles) keeps a personal word list for them.
 
