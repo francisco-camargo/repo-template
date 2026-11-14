@@ -20,13 +20,6 @@ Move each item below into a plan in `plans/`, and leave one line here linking to
 Tag a version whenever the template changes, so a project can record which version it took.
 `copier update` needs the tags too.
 
-## Decide whether the link check belongs in every project
-
-The template runs lychee, which fails a commit when a Markdown link points at a file or heading that is not there.
-dotfiles first added a check like it as specific to that repo.
-Every project that starts here has a README, and most will link within it, which argues for keeping it.
-Against it: the first run downloads lychee through an installer that Windows may flag.
-
 ## Split global excludes from per-project ignores
 
 dotfiles plans a global `core.excludesFile`, which would make a copied `.gitignore` partly unnecessary.
@@ -51,9 +44,7 @@ In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix th
 
 ## Run the gates in CI
 
-The gates run only in a clone where someone ran `pre-commit install`, so a commit made anywhere else skips them.
-A workflow under `.github/workflows/` that runs `pre-commit run --all-files` on every push and pull request catches those commits, after the fact but before a merge.
-It would also be the first place lychee's download runs on Linux, so check that it works there.
+- [Run the gates in CI](plans/gates-in-ci.md): run pre-commit on every push and settle whether lychee stays
 
 ## Point francisco-camargo's notes here
 
