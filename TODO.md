@@ -25,7 +25,7 @@ uvx copier update
 
 `uvx` runs a tool from PyPI without installing it, so the user needs `uv` and `git` and nothing else.
 
-**How a template is built.**
+### How a template is built
 
 - **`copier.yml`** at the root holds the questions and the settings.
 - **`_subdirectory: template`** points copier at the directory this repo already uses, so adopting copier moves no files.
@@ -35,20 +35,22 @@ uvx copier update
 - **`_tasks`** lists commands to run after copying, such as `git init` and `pre-commit install`. Copier refuses to run them unless the user passes `--trust`, which asks the user to trust the template with a shell.
 - **`_message_after_copy`** is text printed at the end, which is where the GitHub settings in [Use it](README.md#use-it) would go.
 
-**How updating works.**
+### How updating works
+
 A project records its answers, and the template version it came from, in `.copier-answers.yml`, which gets committed.
 `copier update` needs, in copier's words, a project that "includes a valid .copier-answers.yml file", a template "versioned with Git (with tags)", and a project "versioned with Git", with a clean `git status`.
 It then does a three-way merge between the old template version, the new one, and the project as it stands.
 A conflict shows up as inline markers, the same as in a `git merge`.
 
-**What it costs.**
+### What it costs
 
 - **Python**, 3.10 or newer, though `uvx` fetches it for a person running one command.
 - **Jinja is harder to read** than a plain file. Keeping `.jinja` to the files that need an answer limits that.
 - **Releases need tags.** A fix is not available to `copier update` until it is tagged.
 - **GitHub's "Use this template" button stops being useful**, because it would copy `copier.yml` and raw `.jinja` files.
 
-**Not yet known.**
+### Not yet known
+
 Copier's documentation says little about taking over a project it did not create.
 Running `copier copy` into an existing repo should ask before overwriting each file that differs, then write `.copier-answers.yml`, after which `copier update` works.
 Overwriting loses the repo's own lines, so they would have to be merged back by hand once, and dotfiles' [repo-template-check skill](https://github.com/francisco-camargo/dotfiles/tree/main/claude/skills/repo-template-check) would show which ones.
