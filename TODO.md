@@ -34,9 +34,7 @@ Either add `!.env.template`, or rename the file to `.env.example` when a project
 
 ## Run the gates over the other repos' files
 
-Every repo has the template's gates, but the gates check only the files a commit stages, so a file nobody has touched since still fails them.
-francisco-camargo's notes fail markdownlint the most; the gb-* repos fail it a few times each.
-In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix the rest by hand.
+- [Run the gates over old files](plans/gates-over-old-files.md): `pre-commit run --all-files` in each repo
 
 ## Add the files the template still lacks
 
