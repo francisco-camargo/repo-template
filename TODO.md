@@ -13,10 +13,7 @@ Move each item below into a plan in `plans/`, and leave one line here linking to
 
 ## Keep template lines apart from project lines
 
-Once a repo adds lines of its own to a template file, any merge, by hand or by copier, has to tell the two apart.
-
-- **`cspell.json`** can `import` another config, so the template's settings could sit in a file of their own and the project's `cspell.json` hold only its words.
-- **`.gitignore`, `.gitattributes`, and `.pre-commit-config.yaml`** have no include. A block of the template's lines at the top, with the project's below, lets a three-way merge apply a template change without touching the project's lines.
+- [Keep template lines apart](plans/template-blocks.md): so a merge can tell the template's lines from a project's
 
 ## Tag releases
 
