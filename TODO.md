@@ -145,13 +145,13 @@ The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credent
 
 ## Keep dotfiles' copies in step until it takes them from here
 
-dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.pre-commit-config.yaml`, and `cspell.json`.
+dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.markdownlint.yaml`, `.pre-commit-config.yaml`, `SECURITY.md`, `_typos.toml`, and `cspell.json`.
 Nothing checks that the copies match, so a change to either copy needs the same change in the other, as a commit in each repo.
 
 `diff` each pair to find drift.
 These differences are meant to be there:
 
-- **`.gitignore`:** the template lets `.env.example` through, and dotfiles has no such file.
-- **`cspell.json`:** dotfiles has its own word list.
+- **`cspell.json` and `_typos.toml`:** dotfiles has its own words.
+- **`SECURITY.md`:** dotfiles links to its security notes.
 
 This item ends when dotfiles [takes the files from here](#move-the-shared-docs-out-of-dotfiles).
