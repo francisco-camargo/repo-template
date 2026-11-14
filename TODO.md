@@ -7,7 +7,6 @@ Each item links to its plan in [plans/](plans/) where it needs more than a line.
 
 - [Move shared docs out of dotfiles](plans/shared-docs.md): security notes and spelling move here; keep dotfiles' copies in step until then
 - [Run the gates in CI](plans/gates-in-ci.md): run pre-commit on every push and settle whether lychee stays
-- [Run the gates over old files](plans/gates-over-old-files.md): `pre-commit run --all-files` in each repo
 
 ## Small tasks
 
