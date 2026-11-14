@@ -109,7 +109,7 @@ In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix th
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
 - **A Python project's files**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. Only a Python project wants them, which is also a question.
-- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/plans/hook-scripts.md). Whether to include it is a question too.
+- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [plan to make the gates easy to adopt](https://github.com/francisco-camargo/dotfiles/blob/main/plans/hook-scripts.md). Whether to include it is a question too.
 
 ## Run the gates in CI
 
@@ -141,7 +141,6 @@ From dotfiles' plans, to become open items here:
 
 After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
 Until then, [keep dotfiles' copies in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
-Its planned `SECURITY.md` would come from here too.
 The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credentials.json` lines, which belong to dotfiles alone; the move is the time to settle where they live.
 
 ## Keep dotfiles' copies in step until it takes them from here
