@@ -107,7 +107,7 @@ In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix th
 - **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
 - **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
 - **A Python project's files**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. Only a Python project wants them, which is also a question.
-- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/docs/plans/hook-scripts.md). Whether to include it is a question too.
+- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [Merge `settings.json` instead of replacing it](https://github.com/francisco-camargo/dotfiles/blob/main/plans/hook-scripts.md). Whether to include it is a question too.
 
 ## Run the gates in CI
 
@@ -135,7 +135,7 @@ From dotfiles' [docs/security.md](https://github.com/francisco-camargo/dotfiles/
 
 From dotfiles' plans, to become open items here:
 
-- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/docs/plans/spelling.md)
+- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/plans/spelling.md)
 
 After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
 Until then, [keep dotfiles' copies in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
