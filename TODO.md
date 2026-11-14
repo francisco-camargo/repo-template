@@ -51,34 +51,4 @@ As each lands here, replace the matching part of those notes with a link to this
 
 ## Move the shared docs out of dotfiles
 
-Part of dotfiles' documentation is about any project, not one person's machines, and belongs here next to the files it explains.
-Each of these would move here and leave a link behind.
-
-From dotfiles' [docs/security.md](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md):
-
-- [Commit the reference, not the secret](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#commit-the-reference-not-the-secret)
-- [Git history does not forget](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#git-history-does-not-forget)
-- [The commit gates](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#the-commit-gates)
-- [Four layers, and what each one misses](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses)
-- [Repo-local hooks, or global, and the trap in the global one](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#repo-local-hooks-or-global-and-the-trap-in-the-global-one)
-
-From dotfiles' plans, to become open items here:
-
-- [Settle how spelling gets checked](https://github.com/francisco-camargo/dotfiles/blob/main/plans/spelling.md)
-
-After that, dotfiles takes its shared files from `template/` like any other project, and keeps only what concerns its owner's machines, such as its cspell word list.
-Until then, [keep dotfiles' copies in step](#keep-dotfiles-copies-in-step-until-it-takes-them-from-here).
-The template's `.gitignore` still carries dotfiles' `.claude.json` and `.credentials.json` lines, which belong to dotfiles alone; the move is the time to settle where they live.
-
-## Keep dotfiles' copies in step until it takes them from here
-
-dotfiles still has its own copies of the files `template/` started from: `.gitattributes`, `.gitignore`, `.markdownlint.yaml`, `.pre-commit-config.yaml`, `SECURITY.md`, `_typos.toml`, and `cspell.json`.
-Nothing checks that the copies match, so a change to either copy needs the same change in the other, as a commit in each repo.
-
-`diff` each pair to find drift.
-These differences are meant to be there:
-
-- **`cspell.json` and `_typos.toml`:** dotfiles has its own words.
-- **`SECURITY.md`:** dotfiles links to its security notes.
-
-This item ends when dotfiles [takes the files from here](#move-the-shared-docs-out-of-dotfiles).
+- [Move shared docs out of dotfiles](plans/shared-docs.md): security notes and spelling move here; keep dotfiles' copies in step until then
