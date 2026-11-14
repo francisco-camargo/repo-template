@@ -48,7 +48,7 @@ The commit gates run markdownlint with `--fix`, so it fixes what it can, such as
 The markdownlint VS Code extension reads the same file, so the editor flags what the gate would.
 
 markdownlint looks for its config in the linted file's folder and each folder above it, so the file has to sit at the project root.
-[francisco-camargo's Markdown notes](https://github.com/francisco-camargo/francisco-camargo/blob/master/src/markdown/README.md#markdown-linting) cover the editor settings and the fallback for a repo without the file.
+[francisco-camargo's Markdown notes](https://github.com/francisco-camargo/francisco-camargo/blob/main/src/markdown/README.md#markdown-linting) cover the editor settings and the fallback for a repo without the file.
 
 ## Spelling
 
