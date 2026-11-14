@@ -3,6 +3,10 @@
 What could come next, and the case for each.
 Delete an item once it is done.
 
+## Split this file into plans
+
+Move each item below into a plan in `plans/`, and leave one line here linking to it, as dotfiles' [planning skill](https://github.com/francisco-camargo/dotfiles/blob/main/claude/skills/planning/SKILL.md) lays out.
+
 ## Consider copier
 
 Copying `template/` by hand has two limits.
