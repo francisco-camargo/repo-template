@@ -22,7 +22,7 @@ The workflow is the first place lychee's download runs on Linux, so this plan se
 ## Steps
 
 - [ ] Add a workflow under `template/.github/workflows/` that runs `pre-commit run --all-files` on push and pull request.
-- [ ] Add the same workflow to this repo, and check that it passes on GitHub, lychee included.
+- [ ] Add the same workflow to this repo, with `--config template/.pre-commit-config.yaml` since the root has no config of its own, and check that it passes on GitHub, lychee included.
 - [ ] Settle the lychee question below, and drop the hook from `template/.pre-commit-config.yaml` if the answer is no.
 
 ## Docs to update
