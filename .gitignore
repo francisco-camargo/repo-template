@@ -1,0 +1,15 @@
+# Credentials.
+.credentials.json
+.claude.json
+.env
+.env.*
+# Names without values, meant to be committed.
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# OS clutter.
+.DS_Store
+Thumbs.db
