@@ -27,13 +27,41 @@ lychee, the link checker, arrives through an installer that Windows may flag wit
 markdownlint, the Markdown linter, runs on Node, which pre-commit downloads for it if Node is not installed.
 
 Some protection lives in GitHub's settings rather than in files, and no copy can turn it on.
-When a repo starts public, or a private one is made public, turn on push protection and a branch ruleset; [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) have the commands.
+When a repo starts public, or a private one is made public, turn on push protection, which [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) give the command for, and [protect the default branch](#protect-the-default-branch).
 Every repo gets [`SECURITY.md`](template/SECURITY.md), private ones included, so it is in place before a repo goes public.
 It sends reports through GitHub's private vulnerability reporting, which GitHub offers only on public repos and which is off until you turn it on:
 
 ```sh
 gh api -X PUT repos/<owner>/<repo>/private-vulnerability-reporting
 ```
+
+## Protect the default branch
+
+Anyone with push access can delete the default branch or force-push over its history, and GitHub allows both until a ruleset forbids them.
+Give each repo a ruleset that blocks both on its default branch, with no one allowed to bypass it.
+Run this inside the clone, where `gh` fills in `{owner}` and `{repo}`:
+
+```sh
+gh api -X POST 'repos/{owner}/{repo}/rulesets' --input - <<'EOF'
+{
+  "name": "protect-main",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {"ref_name": {"include": ["~DEFAULT_BRANCH"], "exclude": []}},
+  "rules": [{"type": "deletion"}, {"type": "non_fast_forward"}]
+}
+EOF
+```
+
+`~DEFAULT_BRANCH` matches whatever the default branch is called.
+A ruleset that names `refs/heads/master` instead keeps naming it after GitHub renames the branch to `main`, and stops protecting anything.
+
+Requiring a pull request before merging is a choice for each repo.
+It suits a repo you change through pull requests, and blocks every direct push to one you don't.
+To add it in the GitHub UI, under Settings > Rules > Rulesets, set required approvals to 0: GitHub does not let you approve your own pull request.
+
+GitHub enforces rulesets on public repos.
+On a private repo under a free personal account it does not, and its API refuses even to list them, so add the ruleset when the repo goes public.
 
 ## Markdown linting
 
