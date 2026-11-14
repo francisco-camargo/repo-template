@@ -47,10 +47,7 @@ In each repo, run `pre-commit run --all-files`, commit what it fixes, and fix th
 
 ## Add the files the template still lacks
 
-- **`README.md`**, a skeleton for the project to fill in. `cp -rn` already leaves a project's own README alone.
-- **`LICENSE`**, a choice of license or none. The choice is a question, so without copier each project picks its own.
-- **A Python project's files**: `pyproject.toml` from `uv init`, `src/` and `tests/` directories, and `.venv/` and `__pycache__/` in `.gitignore`. Only a Python project wants them, which is also a question.
-- **`.claude/settings.json`**, the project-level route to the Claude Code gates, from dotfiles' [plan to make the gates easy to adopt](https://github.com/francisco-camargo/dotfiles/blob/main/plans/hook-scripts.md). Whether to include it is a question too.
+- [Add missing files](plans/missing-files.md): README skeleton, LICENSE, Python files, `.claude/settings.json`
 
 ## Run the gates in CI
 
