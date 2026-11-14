@@ -93,7 +93,7 @@ Either add `!.env.template`, or rename the file to `.env.example` when a project
 
 ## Decide whether copying runs git init and pre-commit install
 
-Today a person copies the files and then runs `pre-commit install` by hand.
+A person who copies the files then runs `pre-commit install` by hand.
 If copier is adopted, its `_tasks` could run `git init` and `pre-commit install` as part of the copy.
 Those tasks only run with `--trust`, which asks the user to trust the template with a shell.
 Printing the commands in `_message_after_copy` instead avoids that, and costs the user two lines of typing.
