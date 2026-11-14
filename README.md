@@ -28,7 +28,7 @@ markdownlint, the Markdown linter, runs on Node, which pre-commit downloads for 
 
 Some protection lives in GitHub's settings rather than in files, and no copy can turn it on.
 When a repo starts public, or a private one is made public, turn on push protection and a branch ruleset; [dotfiles' security notes](https://github.com/francisco-camargo/dotfiles/blob/main/docs/security.md#four-layers-and-what-each-one-misses) have the commands.
-Every repo gets `SECURITY.md`, private ones included, so it is in place before a repo goes public.
+Every repo gets [`SECURITY.md`](template/SECURITY.md), private ones included, so it is in place before a repo goes public.
 It sends reports through GitHub's private vulnerability reporting, which GitHub offers only on public repos and which is off until you turn it on:
 
 ```sh
